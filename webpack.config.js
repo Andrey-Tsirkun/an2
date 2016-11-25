@@ -2,7 +2,8 @@ var webpack = require('webpack');
 module.exports = {
     entry: './app.ts',
     output: {
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        path: './static/bundle'
     },
     devtool: 'source-map',
     resolve: {
