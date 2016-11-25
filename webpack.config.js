@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 module.exports = {
-    entry: './app.ts',
+    entry: {
+        bundle: './app.ts'
+    },
     output: {
         filename: 'bundle.js',
         path: './static/bundle'
@@ -14,19 +16,24 @@ module.exports = {
     ],*/
     module: {
         loaders: [
-            { test: /\.ts$/, loader: 'ts' },
-            { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
+            {
+                test: /\.ts$/,
+                loader: 'ts' },
+            {
+                test: /\.scss$/,
+                loader : 'style!css!sass'
+            },
             {
                 test: /\.css$/,
-                loaders:["style-loader", "css-loader"]
+                loaders: ['style-loader', 'css-loader']
             },
             {
                 test: /\.png$/,
-                loader: "url-loader?limit=100000"
+                loader: 'url-loader?limit=100000'
             },
             {
                 test: /\.jpg$/,
-                loader: "file-loader"
+                loader: 'file-loader'
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -46,4 +53,4 @@ module.exports = {
             }
         ]
     }
-}
+};

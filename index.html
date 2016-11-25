@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="static/bundle/bundle.js"></script>
 </head>
 <body>
     <main>
-        <div id="content" class="container">Loading...</div>
+        <div id="content" class="container">
+            <div id="weather-content">Loading...</div>
+            <div class="btn-group btn-group-lg" role="group" aria-label="pagination">
+                <button type="button" class="pg btn btn-secondary" id="btn_prev">Prev</button>
+                <button type="button" class="pg btn btn-secondary" id="btn_next">Next</button>
+            </div>
+        </div>
+        <div id="map"></div>
     </main>
+    <script src="static/bundle/bundle.js"></script>
+    <script>
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                scrollwheel: false,
+                zoom: 1
+            });
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqdXGXCd1EUzZ8VmYgrFXd7H8nKnaqhsU&callback=initMap" async defer></script>
 </body>
 </html>

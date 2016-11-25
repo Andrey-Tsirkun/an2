@@ -46,15 +46,18 @@
 
 	"use strict";
 	__webpack_require__(1);
-	var services_1 = __webpack_require__(10);
-	var utils_1 = __webpack_require__(11);
+	__webpack_require__(10);
+	var services_1 = __webpack_require__(12);
+	var utils_1 = __webpack_require__(13);
+	var pagination_1 = __webpack_require__(18);
+	var pagination = new pagination_1.Pagination();
 	var WeatherSrv = new services_1.WeatherService(new services_1.XHR());
 	var GeoSrv = new services_1.PositionService();
 	var PrintWeather = new utils_1.PrintWeatherData();
-	GeoSrv.getCurrCoords().then(function (resp) { return WeatherSrv.getWeather(resp.coords).then(function (resp) { return PrintWeather.createTable(resp); }); });
-	/*GoogleMapsLoader.load(function(google) {
-	    new google.maps.Map(el, options);
-	});*/ 
+	GeoSrv.getCurrCoords().then(function (resp) { return WeatherSrv.getWeather(resp.coords).then(function (resp) {
+	    PrintWeather.createTable(resp);
+	    pagination.init();
+	}); });
 
 
 /***/ },
@@ -439,9 +442,49 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(11);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "body {\n  background-image: url(\"/parts/img/pattern.png\"); }\n\n#content {\n  padding: 20px;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8); }\n\n#weatherList {\n  margin: 0 auto;\n  display: inline-block; }\n\n.weather-item {\n  display: none;\n  overflow: hidden; }\n  .weather-item div {\n    display: inline-block;\n    float: left;\n    margin-right: 20px; }\n    .weather-item div:last-child {\n      margin-right: 0; }\n  .weather-item.visible {\n    display: list-item; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
-	var utils_1 = __webpack_require__(11);
-	var es6_promise_1 = __webpack_require__(13);
+	var utils_1 = __webpack_require__(13);
+	var es6_promise_1 = __webpack_require__(15);
 	var Header = (function () {
 	    function Header(header, data) {
 	        this.header = header;
@@ -543,11 +586,11 @@
 
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var config_1 = __webpack_require__(12);
+	var config_1 = __webpack_require__(14);
 	var config = new config_1.Config();
 	var UrlString = (function () {
 	    function UrlString(lat, lon) {
@@ -566,13 +609,14 @@
 	    function PrintWeatherData() {
 	    }
 	    PrintWeatherData.prototype.createTable = function (data) {
-	        console.log(555, data.list);
-	        var elem = document.getElementById('content'), ul = document.createElement('ul');
-	        ul.className = "list-unstyled";
+	        var elem = document.getElementById('weather-content'), ul = document.createElement('ul');
+	        ul.className = 'list-unstyled';
+	        ul.id = 'weatherList';
 	        elem.innerHTML = "";
 	        data.list.forEach(function (val, i, o) {
 	            var li = document.createElement('li'), imgUrl = "http://openweathermap.org/img/w/" + val.weather['0']['icon'] + ".png";
-	            li.innerHTML = "\n                <div>" + val.name + "</div>\n                <div>" + val.main.temp + "&#176;</div>\n                <div><img src=\"" + imgUrl + "\"></div>";
+	            li.className = 'weather-item';
+	            li.innerHTML = "\n                <div><h3>" + val.name + "</h3></div>\n                <div><h3>" + val.main.temp + "&#176;</h3></div>\n                <div><img src=\"" + imgUrl + "\"></div>";
 	            ul.appendChild(li);
 	        });
 	        elem.appendChild(ul);
@@ -583,7 +627,7 @@
 
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -598,7 +642,7 @@
 
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -737,7 +781,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(15);
+	    var vertx = __webpack_require__(17);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -1758,10 +1802,10 @@
 	
 	})));
 	//# sourceMappingURL=es6-promise.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16), (function() { return this; }())))
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1947,10 +1991,59 @@
 
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ITEMS_PER_PAGE = 10;
+	// let currentStart: number = 0;
+	var Pagination = (function () {
+	    function Pagination() {
+	        this.start = 0;
+	        var self = this;
+	        document.querySelector('#btn_prev').addEventListener('click', function (event) {
+	            self.change(false);
+	        }, false);
+	        document.querySelector('#btn_next').addEventListener('click', function (event) {
+	            self.change(true);
+	        }, false);
+	    }
+	    Pagination.prototype.init = function (start) {
+	        if (start === void 0) { start = 0; }
+	        var liSet = document.getElementsByTagName('li');
+	        for (var i = 0; i < liSet.length; i++) {
+	            liSet[i].classList.remove('visible');
+	        }
+	        for (var i = start; i < start + ITEMS_PER_PAGE; i++) {
+	            liSet[i].classList.add('visible');
+	        }
+	    };
+	    Pagination.prototype.change = function (direction) {
+	        var cnt = this.start, liSet = document.getElementsByTagName('li');
+	        console.log(1, cnt);
+	        if (direction) {
+	            cnt += ITEMS_PER_PAGE;
+	            this.start += ITEMS_PER_PAGE;
+	        }
+	        else {
+	            cnt -= ITEMS_PER_PAGE;
+	            this.start -= ITEMS_PER_PAGE;
+	        }
+	        console.log(2, cnt);
+	        if (cnt <= liSet.length && cnt >= 0) {
+	            this.init(cnt);
+	        }
+	    };
+	    return Pagination;
+	}());
+	exports.Pagination = Pagination;
+
 
 /***/ }
 /******/ ]);

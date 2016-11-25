@@ -44,11 +44,10 @@ export class PrintWeatherData {
 
     createTable(data: WeatherList) {
 
-        console.log(555, data.list)
-
-        let elem = document.getElementById('content'),
+        let elem = document.getElementById('weather-content'),
             ul = document.createElement('ul');
-        ul.className = "list-unstyled";
+        ul.className = 'list-unstyled';
+        ul.id = 'weatherList'
 
         elem.innerHTML = ``;
 
@@ -57,9 +56,11 @@ export class PrintWeatherData {
             let li = document.createElement('li'),
                 imgUrl = `http://openweathermap.org/img/w/${val.weather['0']['icon']}.png`;
 
+            li.className = 'weather-item';
+
             li.innerHTML = `
-                <div>${val.name}</div>
-                <div>${val.main.temp}&#176;</div>
+                <div><h3>${val.name}</h3></div>
+                <div><h3>${val.main.temp}&#176;</h3></div>
                 <div><img src="${imgUrl}"></div>`;
 
             ul.appendChild(li);

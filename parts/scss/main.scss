@@ -1,0 +1,33 @@
+body {
+  background-image: url("/parts/img/pattern.png");
+}
+
+#content {
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(256, 256, 256, 0.8);
+}
+
+#weatherList {
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.weather-item {
+  display: none;
+  overflow: hidden;
+
+  div {
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &.visible {
+    display: list-item;
+  }
+}
