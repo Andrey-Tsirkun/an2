@@ -473,7 +473,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background-image: url(\"/parts/img/pattern.png\"); }\n\n#content {\n  padding: 20px;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8); }\n\n#weatherList {\n  margin: 0 auto;\n  display: inline-block; }\n\n.weather-item {\n  display: none;\n  overflow: hidden; }\n  .weather-item div {\n    display: inline-block;\n    float: left;\n    margin-right: 20px; }\n    .weather-item div:last-child {\n      margin-right: 0; }\n  .weather-item.visible {\n    display: list-item; }\n", ""]);
+	exports.push([module.id, "body {\n  background-image: url(\"/parts/img/pattern.png\"); }\n\n#content {\n  padding: 20px;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8); }\n\n#weatherList {\n  margin: 0 auto;\n  display: inline-block; }\n\n.weather-item {\n  display: none;\n  overflow: hidden; }\n  .weather-item div {\n    display: inline-block;\n    float: left;\n    margin-right: 20px; }\n    .weather-item div:last-child {\n      margin-right: 0; }\n  .weather-item.visible {\n    display: list-item; }\n\n#map {\n  width: 100%;\n  height: 200px;\n  margin-top: 30px; }\n", ""]);
 	
 	// exports
 
@@ -2026,17 +2026,25 @@
 	    };
 	    Pagination.prototype.change = function (direction) {
 	        var cnt = this.start, liSet = document.getElementsByTagName('li');
-	        console.log(1, cnt);
+	        console.log(1, cnt, this.start);
 	        if (direction) {
 	            cnt += ITEMS_PER_PAGE;
 	            this.start += ITEMS_PER_PAGE;
+	            if (cnt > liSet.length - ITEMS_PER_PAGE) {
+	                cnt = liSet.length - ITEMS_PER_PAGE;
+	                this.start = liSet.length - ITEMS_PER_PAGE;
+	            }
 	        }
 	        else {
 	            cnt -= ITEMS_PER_PAGE;
 	            this.start -= ITEMS_PER_PAGE;
+	            if (cnt < 0) {
+	                cnt = 0;
+	                this.start = 0;
+	            }
 	        }
-	        console.log(2, cnt);
-	        if (cnt <= liSet.length && cnt >= 0) {
+	        console.log(2, cnt, this.start);
+	        if (cnt <= liSet.length - ITEMS_PER_PAGE && cnt >= 0) {
 	            this.init(cnt);
 	        }
 	    };

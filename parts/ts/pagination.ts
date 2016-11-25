@@ -1,5 +1,4 @@
 const ITEMS_PER_PAGE: number = 10;
-// let currentStart: number = 0;
 
 export class Pagination {
 
@@ -9,11 +8,11 @@ export class Pagination {
 
         let self = this;
 
-        document.querySelector('#btn_prev').addEventListener('click', function( event ) {
+        document.querySelector('#btn_prev').addEventListener('click', function() {
             self.change(false);
         }, false);
 
-        document.querySelector('#btn_next').addEventListener('click', function( event ) {
+        document.querySelector('#btn_next').addEventListener('click', function() {
             self.change(true);
         }, false);
 
@@ -38,12 +37,17 @@ export class Pagination {
         let cnt: number = this.start,
             liSet = document.getElementsByTagName('li');
 
-        console.log(1, cnt)
-
         if(direction) {
 
             cnt += ITEMS_PER_PAGE;
             this.start += ITEMS_PER_PAGE;
+
+            if(cnt > liSet.length - ITEMS_PER_PAGE) {
+
+                cnt = liSet.length - ITEMS_PER_PAGE
+                this.start = liSet.length - ITEMS_PER_PAGE
+
+            }
 
         }
         else {
@@ -51,11 +55,16 @@ export class Pagination {
             cnt -= ITEMS_PER_PAGE;
             this.start -= ITEMS_PER_PAGE;
 
+            if(cnt < 0) {
+
+                cnt = 0;
+                this.start = 0;
+
+            }
+
         }
 
-        console.log(2, cnt)
-
-        if(cnt <= liSet.length && cnt >= 0) {
+        if(cnt <= liSet.length - ITEMS_PER_PAGE && cnt >= 0) {
 
             this.init(cnt)
 

@@ -1,14 +1,13 @@
 "use strict";
 var ITEMS_PER_PAGE = 10;
-// let currentStart: number = 0;
 var Pagination = (function () {
     function Pagination() {
         this.start = 0;
         var self = this;
-        document.querySelector('#btn_prev').addEventListener('click', function (event) {
+        document.querySelector('#btn_prev').addEventListener('click', function () {
             self.change(false);
         }, false);
-        document.querySelector('#btn_next').addEventListener('click', function (event) {
+        document.querySelector('#btn_next').addEventListener('click', function () {
             self.change(true);
         }, false);
     }
@@ -24,17 +23,23 @@ var Pagination = (function () {
     };
     Pagination.prototype.change = function (direction) {
         var cnt = this.start, liSet = document.getElementsByTagName('li');
-        console.log(1, cnt);
         if (direction) {
             cnt += ITEMS_PER_PAGE;
             this.start += ITEMS_PER_PAGE;
+            if (cnt > liSet.length - ITEMS_PER_PAGE) {
+                cnt = liSet.length - ITEMS_PER_PAGE;
+                this.start = liSet.length - ITEMS_PER_PAGE;
+            }
         }
         else {
             cnt -= ITEMS_PER_PAGE;
             this.start -= ITEMS_PER_PAGE;
+            if (cnt < 0) {
+                cnt = 0;
+                this.start = 0;
+            }
         }
-        console.log(2, cnt);
-        if (cnt <= liSet.length && cnt >= 0) {
+        if (cnt <= liSet.length - ITEMS_PER_PAGE && cnt >= 0) {
             this.init(cnt);
         }
     };
