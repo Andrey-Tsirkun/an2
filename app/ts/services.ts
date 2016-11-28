@@ -1,5 +1,4 @@
-import { UrlString } from './utils';
-import { Promise } from 'es6-promise';
+import { UrlString } from '../com/createUrl';
 
 interface Coords {
 
@@ -45,7 +44,7 @@ export class Data {
 
 export class XHR {
 
-    private sendCommand(method: string, url: string, headers: Array<Header>, data: string = ""): Promise<Data> {
+    private sendCommand(method: string, url: string, headers: Array<Header>, data: string = ''): Promise<Data> {
         return new Promise<Data>((resolve, reject) => {
             var jsXHR = new XMLHttpRequest();
             jsXHR.open(method, url);
@@ -87,42 +86,24 @@ export class XHR {
 export class PositionService {
 
     getCurrCoords() {
-
         let options = {
             maximumAge: 60000,
             timeout: 5000,
             enableHighAccuracy: true
-        }
+        };
 
         return new Promise((resolve, reject) => {
-
             navigator.geolocation.getCurrentPosition((crd) => resolve(crd), (err) => reject(err), options);
-
         });
     }
 
 }
 
-export class WeatherService {
-
-    private xhr:XHR;
-
-    constructor(xhr:XHR) {
-
-        this.xhr = xhr;
-
-    }
-
+export class WeatherService extends XHR{
     getWeather(coords: Coords) {
-
         let url = new UrlString(coords.latitude, coords.longitude).getUrl();
-
-        return this.xhr.get(url).then((res) => {
-
+        return this.get(url).then((res) => {
             return JSON.parse(res.text);
-
         })
-
     }
-
 }

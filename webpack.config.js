@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: {
         bundle: './app.ts'
@@ -12,7 +14,8 @@ module.exports = {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
     },
     /*plugins: [
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin()
     ],*/
     module: {
         loaders: [

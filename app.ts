@@ -1,25 +1,21 @@
 import './node_modules/bootstrap/dist/css/bootstrap.css';
-import './parts/scss/main.scss';
+import './app/scss/main.scss';
 
-import {PositionService, XHR, WeatherService} from './parts/ts/services';
-import {PrintWeatherData} from './parts/ts/utils';
+import {PositionService, WeatherService} from './app/ts/services';
+import {PrintWeatherData} from './app/com/createWeatherList';
 
-import { Pagination } from './parts/ts/pagination';
+import { Pagination } from './app/ts/pagination';
 const pagination = new Pagination();
 
-const WeatherSrv = new WeatherService(new XHR());
+const WeatherSrv = new WeatherService();
 const GeoSrv = new PositionService();
 const PrintWeather = new PrintWeatherData();
 
 interface Response {
-
     coords: {
-
         latitude: number,
         longitude: number
-
     }
-
 }
 
 GeoSrv.getCurrCoords().then((resp: Response) => WeatherSrv.getWeather(resp.coords).then(resp => {
