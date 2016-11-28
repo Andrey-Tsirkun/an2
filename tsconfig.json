@@ -12,5 +12,8 @@
   },
   "types": [
     "core-js"
+  ],
+  "typeRoots": [
+    "./node_modules/@types"
   ]
 }

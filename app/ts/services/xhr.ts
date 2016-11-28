@@ -1,12 +1,3 @@
-import { UrlString } from '../com/createUrl';
-
-interface Coords {
-
-    latitude: number,
-    longitude: number
-
-}
-
 export class Header {
     header: string;
     data: string;
@@ -80,30 +71,5 @@ export class XHR {
 
     public post(url: string, data: string = "", headers: Array<Header> = null): Promise<Data> {
         return this.sendCommand('POST', url, headers, data);
-    }
-}
-
-export class PositionService {
-
-    getCurrCoords() {
-        let options = {
-            maximumAge: 60000,
-            timeout: 5000,
-            enableHighAccuracy: true
-        };
-
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition((crd) => resolve(crd), (err) => reject(err), options);
-        });
-    }
-
-}
-
-export class WeatherService extends XHR{
-    getWeather(coords: Coords) {
-        let url = new UrlString(coords.latitude, coords.longitude).getUrl();
-        return this.get(url).then((res) => {
-            return JSON.parse(res.text);
-        })
     }
 }

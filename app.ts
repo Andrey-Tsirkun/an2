@@ -1,8 +1,8 @@
 import './node_modules/bootstrap/dist/css/bootstrap.css';
 import './app/scss/main.scss';
 
-import {PositionService, WeatherService} from './app/ts/services';
-import {PrintWeatherData} from './app/com/createWeatherList';
+import {PositionService, WeatherService} from './app/ts/services/services';
+import {PrintWeatherData} from './app/components/createWeatherList';
 
 import { Pagination } from './app/ts/pagination';
 const pagination = new Pagination();

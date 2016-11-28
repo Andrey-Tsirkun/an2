@@ -1,4 +1,4 @@
-import { Config } from '../ts/config'
+/*import { Config } from '../ts/config'
 let config = new Config();
 
 export class UrlString {
@@ -13,4 +13,4 @@ export class UrlString {
     getUrl(): string {
         return `${this.apiUrl}&units=metric&lat=${this.lat}&lon=${this.lon}&appid=${this.apiId}&cnt=50`;
     }
-}
+}*/
