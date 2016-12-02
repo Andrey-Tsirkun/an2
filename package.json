@@ -1,38 +1,33 @@
 {
-  "name": "angular2",
+  "name": "WeatherApplication",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Learning An2",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tslint -c tslint.json 'src/**/*.ts' && webpack"
+    "start": "tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server"
   },
-  "author": "Andrey Tsirkun",
-  "license": "ISC",
   "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
     "bootstrap": "^3.3.7",
-    "css-loader": "^0.26.0",
-    "es6-promise": "^4.0.5",
-    "file-loader": "^0.9.0",
-    "sass-loader": "^4.0.2",
-    "ts-loader": "^1.2.2",
-    "typescript": "^2.0.10",
-    "webpack": "^1.13.3"
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.23"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.34",
     "css-loader": "^0.26.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.24.1",
-    "node": "0.0.0",
     "node-sass": "^3.13.0",
-    "resolve-url-loader": "^1.6.0",
     "sass": "^0.5.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "typings": "^2.0.0",
+    "ts-loader": "0.8.2",
+    "typescript": "1.8.10",
+    "typings": "1.3.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.3"
+    "webpack": "1.13.0",
+    "webpack-dev-server": "1.14.1"
   }
 }

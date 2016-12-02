@@ -1,4 +1,4 @@
-import { Config } from '../config';
+import { Config } from '../config/config';
 import { XHR } from './xhr'
 let config = new Config();
 

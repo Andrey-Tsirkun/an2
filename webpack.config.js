@@ -1,30 +1,28 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require("webpack");
 
 module.exports = {
     entry: {
-        bundle: './app.ts'
+        "vendor": "./app/vendor",
+        "app": "./app/main"
     },
     output: {
-        filename: 'bundle.js',
-        path: './static/bundle'
+        path: "./dist",
+        filename: "[name].bundle.js"
+    },
+    resolve: {
+        extensions: ['', '.ts', '.js']
     },
     devtool: 'source-map',
-    resolve: {
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
-    },
-    /*plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
-        new HtmlWebpackPlugin()
-    ],*/
     module: {
         loaders: [
             {
-                test: /\.ts$/,
-                loader: 'ts' },
+                test: /\.ts/,
+                loaders: ['ts-loader'],
+                exclude: /node_modules/
+            },
             {
                 test: /\.scss$/,
-                loader : 'style!css!sass'
+                loader: 'style!css!sass'
             },
             {
                 test: /\.css$/,
@@ -55,5 +53,8 @@ module.exports = {
                 loader: 'url?limit=10000&mimetype=image/svg+xml'
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+    ]
 };
