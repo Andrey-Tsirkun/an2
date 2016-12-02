@@ -28,7 +28,6 @@ export class WeatherList {
     }
 
     isActive(i) {
-        console.log(this.visibleStart, this.visibleEnd);
         return (i + 1 <= this.visibleEnd) && (i + 1 >= this.visibleStart);
     }
 }

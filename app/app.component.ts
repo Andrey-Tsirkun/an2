@@ -49,7 +49,6 @@ export class AppComponent {
     }
 
     onChanged(numStart){
-        console.log(numStart)
         this.visibleStart = numStart;
         this.visibleEnd = numStart + config.itemsPerPage;
     }

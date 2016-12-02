@@ -1,5 +1,7 @@
 var webpack = require("webpack");
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = {
     entry: {
         "vendor": "./app/vendor",
@@ -9,10 +11,11 @@ module.exports = {
         path: "./dist",
         filename: "[name].bundle.js"
     },
+    watch: NODE_ENV == 'development',
     resolve: {
         extensions: ['', '.ts', '.js']
     },
-    devtool: 'source-map',
+    devtool: NODE_ENV == 'development' ? 'cheap-inline-module-source-map' : null,
     module: {
         loaders: [
             {
@@ -55,6 +58,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
     ]
 };
