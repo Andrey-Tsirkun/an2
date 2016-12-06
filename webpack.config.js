@@ -11,7 +11,7 @@ module.exports = {
         path: "./dist",
         filename: "[name].bundle.js"
     },
-    watch: NODE_ENV == 'development',
+    // watch: NODE_ENV == 'development',
     resolve: {
         extensions: ['', '.ts', '.js']
     },
