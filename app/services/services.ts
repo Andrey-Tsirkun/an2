@@ -3,14 +3,11 @@ import { XHR } from './xhr'
 let config = new Config();
 
 interface Coords {
-
     latitude: number,
     longitude: number
-
 }
 
 export class PositionService {
-
     getCurrCoords() {
         let options = {
             maximumAge: 60000,
@@ -21,8 +18,7 @@ export class PositionService {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((crd) => resolve(crd), (err) => reject(err), options);
         });
-    }
-}
+    }}
 
 export class WeatherService extends XHR {
     apiId: string = config.id;

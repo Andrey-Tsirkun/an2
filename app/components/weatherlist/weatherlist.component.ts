@@ -12,15 +12,21 @@ interface WeatherData {
     }
 }
 
+interface WeatherError {
+    statusCode: number,
+    statusText: string
+}
+
 @Component({
     selector: 'weather-list',
     templateUrl: `app/components/weatherlist/weatherlist.component.html`,
-    inputs: ['cities', 'visibleStart', 'visibleEnd']
+    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError']
 })
 export class WeatherList {
     cities: WeatherData;
     visibleStart: number;
     visibleEnd: number;
+    weatherError: WeatherError;
 
     ngOnInit() {
         this.visibleStart = 0;
