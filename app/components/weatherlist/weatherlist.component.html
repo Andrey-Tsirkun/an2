@@ -1,14 +1,15 @@
-<div class="center-block" *ngIf="!weatherError && !cities" >
+<div class="center-block" *ngIf="!weatherError && !cities">
     <img src="app/img/sunny.gif">
 </div>
 <div *ngIf="weatherError">
     <h3>{{ weatherError.statusCode }}</h3>
     <h4>{{ weatherError.statusText }}</h4>
 </div>
+<h3 *ngIf="weatherError || cities">Last updated: {{ updDate | date:"dd/MM/yyyy hh:mm" }}</h3>
 <ul class="list-unstyled" id="weatherList" *ngIf="!weatherError">
     <li *ngFor="let city of cities; let i = index" class="weather-item" [ngClass]="{ 'visible': isActive(i) }">
         <div><h3>{{ city.name }}</h3></div>
-        <div><h3>{{ city.main.temp }}°</h3></div>
+        <div><h3>{{ city.main.temp | kelvintocelsium | number: "1.1-1" }}°</h3></div>
         <div><img src="http://openweathermap.org/img/w/{{ city.weather['0']['icon'] }}.png"></div>
     </li>
 </ul>

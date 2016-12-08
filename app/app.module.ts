@@ -8,6 +8,7 @@ import { Header } from './components/header/header.component';
 import { Map } from './components/map/map.component';
 import { Footer } from './components/footer/footer.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { KelvintocelsiumPipe } from './pipes/kelvintocelsium.pipe';
 import { Config } from './config/config'
 
 let config = new Config();
@@ -26,7 +27,8 @@ let config = new Config();
         WeatherList,
         Pager,
         Map,
-        Footer
+        Footer,
+        KelvintocelsiumPipe
     ],
     bootstrap: [
         AppComponent
