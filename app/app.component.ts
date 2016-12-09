@@ -3,7 +3,6 @@
 import { Component } from '@angular/core';
 import { PositionService, WeatherService } from './services/services';
 import { Config } from './config/config';
-import { DecimalPipe } from '@angular/common';
 
 const WeatherSrv = new WeatherService();
 const GeoSrv = new PositionService();
@@ -31,11 +30,16 @@ interface WeatherData {
 @Component({
     selector: 'app',
     template: `
-        <weather-header></weather-header>
-        <weather-list [weatherError]="weatherError" [cities]="cities" [visibleStart]="visibleStart" [visibleEnd]="visibleEnd" [updDate]="updDate"></weather-list>
-        <pager id="pager" [itemsNum]="itemsNum" (onChanged)="onChanged($event)"></pager>
-        <weather-map [lat]="lat" [lon]="lon"></weather-map>
-        <weather-footer></weather-footer>
+        <main>
+            <weather-header></weather-header>
+            <weather-list [weatherError]="weatherError" [cities]="cities" [visibleStart]="visibleStart" [visibleEnd]="visibleEnd" [updDate]="updDate"></weather-list>
+            <pager id="pager" [itemsNum]="itemsNum" (onChanged)="onChanged($event)"></pager>
+            <weather-map [lat]="lat" [lon]="lon"></weather-map>
+            <weather-footer></weather-footer>
+        </main>
+        <aside>
+            <weather-cityweather></weather-cityweather>
+        </aside>        
         `
 })
 
@@ -62,6 +66,7 @@ export class AppComponent {
                 this.itemsNum = Object.keys(this.cities).length;
                 this.updDate = new Date();
             }, (err) => {
+                this.updDate = new Date();
                 this.weatherError = err;
             })
         });
