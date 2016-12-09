@@ -18,7 +18,7 @@ export class TemplatePipe implements PipeTransform {
             wind: number,
             tmpl: string = '';
 
-        let json = data.json();
+        let json = JSON.parse(data.text);
 
         cityName = json.name;
 
