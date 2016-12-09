@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -13,12 +14,14 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { KelvintocelsiumPipe } from './pipes/kelvintocelsium.pipe';
 import { CityweatherPipe } from './pipes/cityweather.pipe';
 import { Config } from './config/config'
+import {TemplatePipe} from "./pipes/template.pipe";
 
 let config = new Config();
 
 @NgModule({
     imports: [
         BrowserModule,
+        HttpModule,
         CommonModule,
         FormsModule,
         AgmCoreModule.forRoot({
@@ -34,6 +37,7 @@ let config = new Config();
         Footer,
         KelvintocelsiumPipe,
         CityweatherPipe,
+        TemplatePipe,
         Cityweather
     ],
     bootstrap: [

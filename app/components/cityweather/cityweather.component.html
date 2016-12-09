@@ -1,4 +1,4 @@
 <div>
-    <input type="text" [ngModel]="city" (ngModelChange)="changed($event)" placeholder="City">
+    <input type="text" (change)="changed($event)" placeholder="City">
 </div>
-<div id="cityweather-output" [innerHtml]="city | cityweather"></div>
+<div id="cityweather-output" [innerHtml]="city | cityweather | async | templatePipe"></div>

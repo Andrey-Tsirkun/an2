@@ -8,14 +8,15 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class Cityweather {
     city: string;
-    data: any;
     modelChanged: Subject<string> = new Subject<string>();
 
     constructor() {
         this.modelChanged
             .debounceTime(1000)
             .distinctUntilChanged()
+            .last()
             .subscribe((model): void => {
+            console.log('->', model)
                 this.city = model;
             });
     }
