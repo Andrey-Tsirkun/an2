@@ -26,12 +26,8 @@ export class WeatherList {
     cities: IWeatherData;
     visibleStart: number;
     visibleEnd: number;
-<<<<<<< HEAD
     weatherError: IWeatherError;
-=======
-    weatherError: WeatherError;
     updDate: Date;
->>>>>>> pipes
 
     ngOnInit() {
         this.visibleStart = 0;

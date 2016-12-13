@@ -30,32 +30,24 @@ interface IWeatherData {
 @Component({
     selector: 'app',
     template: `
-<<<<<<< HEAD
-        <weather-header></weather-header>
-        <weather-list 
-            [weatherError]="weatherError"
-            [cities]="cities"
-            [visibleStart]="visibleStart"
-            [visibleEnd]="visibleEnd"></weather-list>
-        <pager id="pager"
-            [itemsNum]="itemsNum"
-            (onChanged)="onChanged($event)"></pager>
-        <weather-map
-            [lat]="lat"
-            [lon]="lon"></weather-map>
-        <weather-footer></weather-footer>
-=======
         <main>
             <weather-header></weather-header>
-            <weather-list [weatherError]="weatherError" [cities]="cities" [visibleStart]="visibleStart" [visibleEnd]="visibleEnd" [updDate]="updDate"></weather-list>
-            <pager id="pager" [itemsNum]="itemsNum" (onChanged)="onChanged($event)"></pager>
-            <weather-map [lat]="lat" [lon]="lon"></weather-map>
+            <weather-list 
+                [weatherError]="weatherError"
+                [cities]="cities"
+                [visibleStart]="visibleStart"
+                [visibleEnd]="visibleEnd"></weather-list>
+            <pager id="pager"
+                [itemsNum]="itemsNum"
+                (onChanged)="onChanged($event)"></pager>
+            <weather-map
+                [lat]="lat"
+                [lon]="lon"></weather-map>
             <weather-footer></weather-footer>
         </main>
         <aside>
             <weather-cityweather></weather-cityweather>
-        </aside>        
->>>>>>> pipes
+        </aside> 
         `
 })
 
@@ -73,12 +65,7 @@ export class AppComponent {
     updDate: Date;
 
     ngOnInit() {
-<<<<<<< HEAD
-
         GeoSrv.getCurrCoords().then((resp: IResponse) => {
-=======
-        GeoSrv.getCurrCoords().then((resp: Response) => {
->>>>>>> pipes
             this.lat = resp.coords.latitude;
             this.lon = resp.coords.longitude;
 
