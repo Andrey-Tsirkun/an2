@@ -29,7 +29,7 @@ export class WeatherService extends XHR {
     }
 
     private getUrl(coords: {latitude: number, longitude: number}): string {
-        return `${this.apiUrl}&units=metric&lat=${coords.latitude}&lon=${coords.longitude}&appid=${this.apiId}&cnt=50`;
+        return `${this.apiUrl}&lat=${coords.latitude}&lon=${coords.longitude}&appid=${this.apiId}&cnt=50`;
     }
 
     getWeather(coords: Coords) {

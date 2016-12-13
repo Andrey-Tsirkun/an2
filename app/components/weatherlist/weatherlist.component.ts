@@ -20,13 +20,18 @@ interface IWeatherError {
 @Component({
     selector: 'weather-list',
     templateUrl: `app/components/weatherlist/weatherlist.component.html`,
-    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError']
+    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate']
 })
 export class WeatherList {
     cities: IWeatherData;
     visibleStart: number;
     visibleEnd: number;
+<<<<<<< HEAD
     weatherError: IWeatherError;
+=======
+    weatherError: WeatherError;
+    updDate: Date;
+>>>>>>> pipes
 
     ngOnInit() {
         this.visibleStart = 0;
