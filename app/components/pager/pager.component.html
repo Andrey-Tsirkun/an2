@@ -1,4 +1,11 @@
 <div *ngIf="_itemsNum > 0" class="btn-group btn-group-lg" role="group" aria-label="pagination">
-    <button type="button" class="pg btn btn-secondary" id="btn_prev" (click)="changePage(false)">Prev</button>
-    <button type="button" class="pg btn btn-secondary" id="btn_next" (click)="changePage(true)">Next</button>
+    <button
+            type="button"
+            class="pg btn btn-secondary"
+            id="btn_prev"
+            (click)="changePage(false)">Prev</button>
+    <button type="button"
+            class="pg btn btn-secondary"
+            id="btn_next"
+            (click)="changePage(true)">Next</button>
 </div>

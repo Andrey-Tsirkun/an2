@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-interface WeatherData {
+interface IWeatherData {
     name: string,
     main: {
         temp: number
@@ -12,7 +12,7 @@ interface WeatherData {
     }
 }
 
-interface WeatherError {
+interface IWeatherError {
     statusCode: number,
     statusText: string
 }
@@ -23,10 +23,10 @@ interface WeatherError {
     inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError']
 })
 export class WeatherList {
-    cities: WeatherData;
+    cities: IWeatherData;
     visibleStart: number;
     visibleEnd: number;
-    weatherError: WeatherError;
+    weatherError: IWeatherError;
 
     ngOnInit() {
         this.visibleStart = 0;

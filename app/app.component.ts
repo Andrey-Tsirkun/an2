@@ -8,14 +8,14 @@ const WeatherSrv = new WeatherService();
 const GeoSrv = new PositionService();
 let config = new Config();
 
-interface Response {
+interface IResponse {
     coords: {
         latitude: number,
         longitude: number
     }
 }
 
-interface WeatherData {
+interface IWeatherData {
     name: string,
     main: {
         temp: number
@@ -31,15 +31,23 @@ interface WeatherData {
     selector: 'app',
     template: `
         <weather-header></weather-header>
-        <weather-list [weatherError]="weatherError" [cities]="cities" [visibleStart]="visibleStart" [visibleEnd]="visibleEnd"></weather-list>
-        <pager id="pager" [itemsNum]="itemsNum" (onChanged)="onChanged($event)"></pager>
-        <weather-map [lat]="lat" [lon]="lon"></weather-map>
+        <weather-list 
+            [weatherError]="weatherError"
+            [cities]="cities"
+            [visibleStart]="visibleStart"
+            [visibleEnd]="visibleEnd"></weather-list>
+        <pager id="pager"
+            [itemsNum]="itemsNum"
+            (onChanged)="onChanged($event)"></pager>
+        <weather-map
+            [lat]="lat"
+            [lon]="lon"></weather-map>
         <weather-footer></weather-footer>
         `
 })
 
 export class AppComponent {
-    cities: WeatherData;
+    cities: IWeatherData;
     visibleStart: number;
     visibleEnd: number;
     itemsNum: number;
@@ -52,7 +60,7 @@ export class AppComponent {
 
     ngOnInit() {
 
-        GeoSrv.getCurrCoords().then((resp: Response) => {
+        GeoSrv.getCurrCoords().then((resp: IResponse) => {
             this.lat = resp.coords.latitude;
             this.lon = resp.coords.longitude;
 

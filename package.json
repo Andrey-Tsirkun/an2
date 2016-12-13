@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Learning An2",
   "scripts": {
-    "postinstall": "typings install",
-    "start": "tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "start": "npm run lint && webpack-dev-server",
     "startDev": "SET 'NODE_ENV=development' && tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server",
     "startProd": "SET 'NODE_ENV=production' && tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server"
   },

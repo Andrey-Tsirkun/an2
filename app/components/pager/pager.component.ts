@@ -17,7 +17,7 @@ export class Pager {
         this._itemsNum = itemsNum;
     }
 
-    changePage(direction): void {
+    changePage(direction: boolean): void {
         let cnt: number = this.start;
 
         if(direction) {

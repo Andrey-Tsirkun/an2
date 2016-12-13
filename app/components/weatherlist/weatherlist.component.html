@@ -7,8 +7,8 @@
 </div>
 <ul class="list-unstyled" id="weatherList" *ngIf="!weatherError">
     <li *ngFor="let city of cities; let i = index" class="weather-item" [ngClass]="{ 'visible': isActive(i) }">
-        <div><h3>{{ city.name }}</h3></div>
-        <div><h3>{{ city.main.temp }}°</h3></div>
+        <h3>{{ city.name }}</h3>
+        <h3>{{ city.main.temp }}°</h3>
         <div><img src="http://openweathermap.org/img/w/{{ city.weather['0']['icon'] }}.png"></div>
     </li>
 </ul>
