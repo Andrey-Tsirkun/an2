@@ -1,17 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { XHR } from '../services/xhr';
+import {Http, Response} from '@angular/http';
 import { Config } from '../config/config';
-import { KelvintocelsiumPipe } from './kelvintocelsium.pipe';
+import {Observable, Subscription} from "rxjs";
 
 let config = new Config();
+
+interface CityTemp {
+    name: string;
+}
 
 @Pipe({
     name: 'cityweather'
 })
-export class CityweatherPipe extends XHR implements PipeTransform {
+export class CityweatherPipe implements PipeTransform {
     model = {};
-    transform(value: string): Object {
-        if(value) {
+
+    constructor(private http: Http) {}
+
+    transform(city: string): Observable<Subscription> {
+        if(city) {
             let data = {},
                 cityName: string,
                 temp: number,
@@ -19,20 +26,17 @@ export class CityweatherPipe extends XHR implements PipeTransform {
                 pressure: number,
                 wind: number;
 
-            console.log(value, this.model);
+            console.log(city, this.model);
 
-            if(this.model.hasOwnProperty(value)) {
-                cityName = value;
-                temp = this.model[value].temp;
-                humidity = this.model[value].humidity;
-                pressure = this.model[value].pressure;
-                wind = this.model[value].wind;
+            if(this.model.hasOwnProperty(city)) {
+                return Observable.of(this.model[city]);
+            }
+            else {
+                return this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`).subscribe();
+            }
 
-                return `<div>${cityName}</div>
-                        <div><span>Temperature:</span> ${temp}°</div>
-                        <div><span>Humidity:</span> ${humidity}%</div>
-                        <div><span>Pressure:</span> ${pressure} gPa</div>
-                        <div><span>Wind:</span> ${wind} m/s</div>`;
+            /*if(this.model.hasOwnProperty(value)) {
+                return new Promise(()=> {})
             }
             else {
                 return this.get(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${config.id}`).then((res) => {
@@ -61,7 +65,7 @@ export class CityweatherPipe extends XHR implements PipeTransform {
                     return `<div>Something went wrong!</div>
                             <div>err</div>`
                 });
-            }
+            }*/
         }
     }
 }

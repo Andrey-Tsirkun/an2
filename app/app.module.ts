@@ -13,6 +13,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { KelvintocelsiumPipe } from './pipes/kelvintocelsium.pipe';
 import { CityweatherPipe } from './pipes/cityweather.pipe';
 import { Config } from './config/config'
+import { HttpModule }   from '@angular/http';
 
 let config = new Config();
 
@@ -21,6 +22,7 @@ let config = new Config();
         BrowserModule,
         CommonModule,
         FormsModule,
+        HttpModule,
         AgmCoreModule.forRoot({
             apiKey: config.googleMapKey
         })
