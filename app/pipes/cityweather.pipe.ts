@@ -1,39 +1,61 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Config } from '../config/config';
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subscriber} from "rxjs";
 
 let config = new Config();
 
 interface CityTemp {
-    name: string;
+    id?: number;
+    name?: string;
+    main?: {
+        temp: number
+    };
+    coord?: {
+        lat: string,
+        lon: string
+    };
+    dt?: number;
 }
 
 @Pipe({
     name: 'cityweather'
 })
 export class CityweatherPipe implements PipeTransform {
-    model = {};
+    output: Observable<CityTemp>;
+    cachedNames: string[];
+    cityCache: CityTemp[] = [];
 
     constructor(private http: Http) {}
 
-    transform(city: string): Observable<Subscription> {
-        if(city) {
-            let data = {},
-                cityName: string,
-                temp: number,
-                humidity: number,
-                pressure: number,
-                wind: number;
+    transform(city: string): Observable<CityTemp> {
 
-            console.log(city, this.model);
+        let index: number;
+        this.cachedNames = this.cityCache.map(n => n.name);
+        index = this.cachedNames.indexOf(city);
+        console.log(this.cachedNames, this.cityCache, index)
 
-            if(this.model.hasOwnProperty(city)) {
-                return Observable.of(this.model[city]);
-            }
-            else {
-                return this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`).subscribe();
-            }
+        if (index === -1) {
+            this.output = this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`)
+                .map(newCity => {
+                    console.log('newCity', JSON.parse(newCity["_body"]))
+                    this.cityCache.push(JSON.parse(newCity["_body"]));
+                    return newCity;
+                })
+        }
+        else {
+            const cachedIndex = this.cityCache[index];
+            const name = cachedIndex.name;
+            const temp = cachedIndex.main.temp;
+
+            this.output = new Observable(
+                (observer: Subscriber<CityTemp>) => {
+                    observer.next(`${name}: current temperature is ${temp}°C`);
+                });
+        }
+
+        return this.output;
+    }
 
             /*if(this.model.hasOwnProperty(value)) {
                 return new Promise(()=> {})
@@ -66,6 +88,5 @@ export class CityweatherPipe implements PipeTransform {
                             <div>err</div>`
                 });
             }*/
-        }
+
     }
-}
