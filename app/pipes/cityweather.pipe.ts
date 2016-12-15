@@ -23,10 +23,10 @@ interface CityTemp {
 })
 export class CityWeatherPipe implements PipeTransform {
     output: Observable<CityTemp>;
-    cache: Map<string, Object>;
+    cache: Set<Object>;
 
     constructor(private http: Http) {
-        this.cache = new Map<string,Object>();
+        this.cache = new Set<Object>();
     }
 
     transform(city: string): Observable<CityTemp> {
@@ -42,7 +42,7 @@ export class CityWeatherPipe implements PipeTransform {
                     })
             }
             else {
-                let cityData = this.cache[city]
+                let cityData = this.cache[city];
 
                 this.output = new Observable(
                     (observer: Subscriber<CityTemp>) => {
