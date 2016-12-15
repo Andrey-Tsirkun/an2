@@ -1,67 +1,56 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { XHR } from '../services/xhr';
+import {Http, Response} from '@angular/http';
 import { Config } from '../config/config';
-import { KelvintocelsiumPipe } from './kelvintocelsium.pipe';
+import {Observable, Subscriber} from "rxjs";
 
 let config = new Config();
+
+interface CityTemp {
+    id?: number;
+    name?: string;
+    main?: {
+        temp: number
+    };
+    coord?: {
+        lat: string,
+        lon: string
+    };
+    dt?: number;
+}
 
 @Pipe({
     name: 'cityweather'
 })
-export class CityweatherPipe extends XHR implements PipeTransform {
-    model = {};
-    transform(value: string): Object {
-        if(value) {
-            let data = {},
-                cityName: string,
-                temp: number,
-                humidity: number,
-                pressure: number,
-                wind: number;
+export class CityWeatherPipe implements PipeTransform {
+    output: Observable<CityTemp>;
+    cache: Set<Object>;
 
-            console.log(value, this.model);
+    constructor(private http: Http) {
+        this.cache = new Set<Object>();
+    }
 
-            if(this.model.hasOwnProperty(value)) {
-                cityName = value;
-                temp = this.model[value].temp;
-                humidity = this.model[value].humidity;
-                pressure = this.model[value].pressure;
-                wind = this.model[value].wind;
+    transform(city: string): Observable<CityTemp> {
 
-                return `<div>${cityName}</div>
-                        <div><span>Temperature:</span> ${temp}°</div>
-                        <div><span>Humidity:</span> ${humidity}%</div>
-                        <div><span>Pressure:</span> ${pressure} gPa</div>
-                        <div><span>Wind:</span> ${wind} m/s</div>`;
+        if(city) {
+            if (!this.cache.hasOwnProperty(city)) {
+                this.output = this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`)
+                    .map(data => {
+                        let shortData = JSON.parse(data["_body"]);
+                        shortData.created = + new Date();
+                        this.cache[city] = shortData;
+                        return shortData;
+                    })
             }
             else {
-                return this.get(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${config.id}`).then((res) => {
-                    let data = JSON.parse(res.text);
+                let cityData = this.cache[city];
 
-                    cityName = data.name;
-                    temp = new KelvintocelsiumPipe().transform(data.main.temp);
-                    humidity = data.main.humidity;
-                    pressure = data.main.pressure;
-                    wind = data.wind.speed;
-
-                    this.model[cityName] = {
-                        temp: new KelvintocelsiumPipe().transform(data.main.temp),
-                        humidity: data.main.humidity,
-                        pressure: data.main.pressure,
-                        wind: data.wind.speed,
-                        stamp: + new Date()
-                    };
-
-                    return `<div>${cityName}</div>
-                            <div><span>Temperature:</span> ${temp}°</div>
-                            <div><span>Humidity:</span> ${humidity}%</div>
-                            <div><span>Pressure:</span> ${pressure} gPa</div>
-                            <div><span>Wind:</span> ${wind} m/s</div>`;
-                }, (err) => {
-                    return `<div>Something went wrong!</div>
-                            <div>err</div>`
-                });
+                this.output = new Observable(
+                    (observer: Subscriber<CityTemp>) => {
+                        observer.next(cityData);
+                    });
             }
+
+            return this.output;
         }
     }
 }

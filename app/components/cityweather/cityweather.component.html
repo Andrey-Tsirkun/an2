@@ -1,4 +1,4 @@
 <div>
     <input type="text" [ngModel]="city" (ngModelChange)="changed($event)" placeholder="City">
 </div>
-<div id="cityweather-output" [innerHtml]="city | cityweather"></div>
+<div id="cityweather-output" *ngIf="city">Temperature: <span [innerHtml]="city | cityweather | async | cityweatherjsontodata"></span>°</div>
