@@ -10,8 +10,9 @@ import { Map } from './components/map/map.component';
 import { Footer } from './components/footer/footer.component';
 import { Cityweather } from './components/cityweather/cityweather.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import { KelvintocelsiumPipe } from './pipes/kelvintocelsium.pipe';
-import { CityweatherPipe } from './pipes/cityweather.pipe';
+import { KelvinToCelsiumPipe } from './pipes/kelvintocelsium.pipe';
+import { CityWeatherPipe } from './pipes/cityweather.pipe';
+import { CityweathertodataPipe } from './pipes/cityweathertodata.pipe';
 import { Config } from './config/config'
 import { HttpModule }   from '@angular/http';
 
@@ -34,8 +35,9 @@ let config = new Config();
         Pager,
         Map,
         Footer,
-        KelvintocelsiumPipe,
-        CityweatherPipe,
+        KelvinToCelsiumPipe,
+        CityweathertodataPipe,
+        CityWeatherPipe,
         Cityweather
     ],
     bootstrap: [

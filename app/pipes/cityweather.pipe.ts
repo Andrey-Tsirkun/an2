@@ -21,7 +21,7 @@ interface CityTemp {
 @Pipe({
     name: 'cityweather'
 })
-export class CityweatherPipe implements PipeTransform {
+export class CityWeatherPipe implements PipeTransform {
     output: Observable<CityTemp>;
     cache: Map<string, Object>;
 
@@ -36,6 +36,7 @@ export class CityweatherPipe implements PipeTransform {
                 this.output = this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`)
                     .map(data => {
                         let shortData = JSON.parse(data["_body"]);
+                        shortData.created = + new Date();
                         this.cache[city] = shortData;
                         return shortData;
                     })
