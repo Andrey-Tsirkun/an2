@@ -24,7 +24,8 @@ interface IWeatherData {
         0: {
             icon: string
         }
-    }
+    },
+    selected: boolean
 }
 
 @Component({

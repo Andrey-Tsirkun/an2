@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 interface IWeatherData {
     name: string,
@@ -20,7 +20,8 @@ interface IWeatherError {
 @Component({
     selector: 'weather-list',
     templateUrl: `app/components/weatherlist/weatherlist.component.html`,
-    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate']
+    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherList {
     cities: IWeatherData;
@@ -28,6 +29,7 @@ export class WeatherList {
     visibleEnd: number;
     weatherError: IWeatherError;
     updDate: Date;
+    selected: boolean;
 
     ngOnInit() {
         this.visibleStart = 0;
@@ -36,5 +38,9 @@ export class WeatherList {
 
     isActive(i) {
         return (i + 1 <= this.visibleEnd) && (i + 1 >= this.visibleStart);
+    }
+
+    markCity(city) {
+        city.selected = !city.selected;
     }
 }

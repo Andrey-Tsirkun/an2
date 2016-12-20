@@ -7,7 +7,9 @@
 </div>
 <h3 *ngIf="weatherError || cities">Last updated: {{ updDate | date:"dd/MM/yyyy hh:mm" }}</h3>
 <ul class="list-unstyled" id="weatherList" *ngIf="!weatherError">
-    <li *ngFor="let city of cities; let i = index" class="weather-item" [ngClass]="{ 'visible': isActive(i) }">
+    <li *ngFor="let city of cities; let i = index" class="weather-item"
+        [ngClass]="{ 'visible': isActive(i), 'selected': city.selected }"
+        (click)="markCity(city)">
         <div><h3>{{ city.name }}</h3></div>
         <div><h3>{{ city.main.temp | kelvintocelsium | number: "1.1-1" }}°</h3></div>
         <div><img src="http://openweathermap.org/img/w/{{ city.weather['0']['icon'] }}.png"></div>
