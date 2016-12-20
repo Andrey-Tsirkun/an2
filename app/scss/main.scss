@@ -20,14 +20,22 @@ body {
 .weather-item {
   display: none;
   overflow: hidden;
+  cursor: pointer;
 
-  div {
-    display: inline-block;
-    float: left;
-    margin-right: 20px;
+  .itemInner {
+    display: flex;
 
-    &:last-child {
-      margin-right: 0;
+    div {
+      margin: 0 10px;
+
+      &.star {
+        margin-top: 20px;
+        font-size: 22px;
+
+        &.selected {
+          color: #02b7D1;
+        }
+      }
     }
   }
 
