@@ -13,8 +13,9 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { KelvinToCelsiumPipe } from './pipes/kelvintocelsium.pipe';
 import { CityWeatherPipe } from './pipes/cityweather.pipe';
 import { CityweathertodataPipe } from './pipes/cityweathertodata.pipe';
-import { Config } from './config/config'
+import { Config } from './config/config';
 import { HttpModule }   from '@angular/http';
+import { FavoriteList } from './components/favoriteList/favoriteList.component';
 
 let config = new Config();
 
@@ -35,6 +36,7 @@ let config = new Config();
         Pager,
         Map,
         Footer,
+        FavoriteList,
         KelvinToCelsiumPipe,
         CityweathertodataPipe,
         CityWeatherPipe,

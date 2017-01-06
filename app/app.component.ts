@@ -49,6 +49,7 @@ interface IWeatherData {
         <aside>
             <weather-cityweather></weather-cityweather>
         </aside> 
+        <favorite-list></favorite-list>
         `
 })
 
