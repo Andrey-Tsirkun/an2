@@ -1,10 +1,10 @@
 /// <reference path="../typings/index.d.ts" />
 
 import { Component } from '@angular/core';
-import { PositionService, WeatherService } from './services/services';
+import { PositionService } from './services/services';
 import { Config } from './config/config';
+import { HttpService } from './services/http.service';
 
-const WeatherSrv = new WeatherService();
 const GeoSrv = new PositionService();
 let config = new Config();
 
@@ -30,6 +30,7 @@ interface IWeatherData {
 
 @Component({
     selector: 'app',
+    providers: [HttpService],
     template: `
         <main>
             <weather-header></weather-header>
@@ -66,19 +67,31 @@ export class AppComponent {
     };
     updDate: Date;
 
+    constructor(private httpService: HttpService){}
+
     ngOnInit() {
         GeoSrv.getCurrCoords().then((resp: IResponse) => {
             this.lat = resp.coords.latitude;
             this.lon = resp.coords.longitude;
 
-            WeatherSrv.getWeather(resp.coords).then(resp => {
+            this.httpService.getWeather(resp.coords).toPromise().then(
+                res => {
+                    this.cities = res.json().list;
+                    this.itemsNum = Object.keys(this.cities).length;
+                    this.updDate = new Date();
+                }, (err) => {
+                    this.updDate = new Date();
+                    this.weatherError = err;
+                })
+
+            /*WeatherSrv.getWeather(resp.coords).then(resp => {
                 this.cities = resp.list;
                 this.itemsNum = Object.keys(this.cities).length;
                 this.updDate = new Date();
             }, (err) => {
                 this.updDate = new Date();
                 this.weatherError = err;
-            })
+            })*/
         });
     }
 
