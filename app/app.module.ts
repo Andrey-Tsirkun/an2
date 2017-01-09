@@ -16,6 +16,7 @@ import { CityweathertodataPipe } from './pipes/cityweathertodata.pipe';
 import { Config } from './config/config';
 import { HttpModule }   from '@angular/http';
 import { FavoriteList } from './components/favoriteList/favoriteList.component';
+import { WeatherColor }from './directives/weathercolor/weathercolor.directive'
 
 let config = new Config();
 
@@ -40,7 +41,8 @@ let config = new Config();
         KelvinToCelsiumPipe,
         CityweathertodataPipe,
         CityWeatherPipe,
-        Cityweather
+        Cityweather,
+        WeatherColor
     ],
     bootstrap: [
         AppComponent

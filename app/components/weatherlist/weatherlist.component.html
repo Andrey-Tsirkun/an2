@@ -10,10 +10,10 @@
     <li *ngFor="let city of cities; let i = index" class="weather-item"
         [ngClass]="{ 'visible': isActive(i) }"
         (click)="markCity(city)">
-        <div class="itemInner">
+        <div class="itemInner" [(temp)]="city.main.temp" weathercolor>
             <div class=" star glyphicon glyphicon-star" [ngClass]="{ 'selected': city.selected }"></div>
             <div><h3>{{ city.name }}</h3></div>
-            <div><h3>{{ city.main.temp | kelvintocelsium | number: "1.1-1" }}°</h3></div>
+            <div><h3 class="temp">{{ city.main.temp | kelvintocelsium | number: "1.1-1" }}°</h3></div>
             <div><img src="http://openweathermap.org/img/w/{{ city.weather['0']['icon'] }}.png"></div>
         </div>
     </li>
