@@ -9,6 +9,7 @@ import { Header } from './components/header/header.component';
 import { Map } from './components/map/map.component';
 import { Footer } from './components/footer/footer.component';
 import { Cityweather } from './components/cityweather/cityweather.component';
+import { Wind } from './components/wind/wind.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { KelvinToCelsiumPipe } from './pipes/kelvintocelsium.pipe';
 import { CityWeatherPipe } from './pipes/cityweather.pipe';
@@ -16,7 +17,8 @@ import { CityweathertodataPipe } from './pipes/cityweathertodata.pipe';
 import { Config } from './config/config';
 import { HttpModule }   from '@angular/http';
 import { FavoriteList } from './components/favoriteList/favoriteList.component';
-import { WeatherColor } from './directives/weathercolor/weathercolor.directive'
+import { WeatherColor } from './directives/weathercolor/weathercolor.directive';
+import { WindInfo } from './directives/windinfo/windinfo.directive';
 
 let config = new Config();
 
@@ -38,11 +40,13 @@ let config = new Config();
         Map,
         Footer,
         FavoriteList,
+        Wind,
         KelvinToCelsiumPipe,
         CityweathertodataPipe,
         CityWeatherPipe,
         Cityweather,
-        WeatherColor
+        WeatherColor,
+        WindInfo
     ],
     bootstrap: [
         AppComponent

@@ -83,15 +83,6 @@ export class AppComponent {
                     this.updDate = new Date();
                     this.weatherError = err;
                 })
-
-            /*WeatherSrv.getWeather(resp.coords).then(resp => {
-                this.cities = resp.list;
-                this.itemsNum = Object.keys(this.cities).length;
-                this.updDate = new Date();
-            }, (err) => {
-                this.updDate = new Date();
-                this.weatherError = err;
-            })*/
         });
     }
 

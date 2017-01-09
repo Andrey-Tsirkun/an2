@@ -10,7 +10,7 @@ export class WeatherColor{
 
     ngOnChanges() {
         if (this.temp) {
-            this.elementRef.nativeElement.style.backgroundColor = this.shadeColor(+(this.temp - 273.15).toFixed(0));
+            this.elementRef.nativeElement.style.color = this.shadeColor(+(this.temp - 273.15).toFixed(0));
         }
     }
 
