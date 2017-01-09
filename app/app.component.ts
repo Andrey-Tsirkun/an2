@@ -77,6 +77,7 @@ export class AppComponent {
             this.httpService.getWeather(resp.coords).toPromise().then(
                 res => {
                     this.cities = res.json().list;
+                    console.log(this.cities)
                     this.itemsNum = Object.keys(this.cities).length;
                     this.updDate = new Date();
                 }, (err) => {

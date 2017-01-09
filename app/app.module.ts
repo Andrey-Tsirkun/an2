@@ -19,6 +19,7 @@ import { HttpModule }   from '@angular/http';
 import { FavoriteList } from './components/favoriteList/favoriteList.component';
 import { WeatherColor } from './directives/weathercolor/weathercolor.directive';
 import { WindInfo } from './directives/windinfo/windinfo.directive';
+import { WeatherIcon } from './components/weathericon/weathericon.component';
 
 let config = new Config();
 
@@ -46,7 +47,8 @@ let config = new Config();
         CityWeatherPipe,
         Cityweather,
         WeatherColor,
-        WindInfo
+        WindInfo,
+        WeatherIcon
     ],
     bootstrap: [
         AppComponent
