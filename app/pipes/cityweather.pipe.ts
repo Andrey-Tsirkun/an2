@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Config } from '../config/config';
-import {Observable, Subscriber} from "rxjs";
+import {Observable, Subscriber, BehaviorSubject} from "rxjs";
 
 let config = new Config();
 
@@ -30,6 +30,13 @@ export class CityWeatherPipe implements PipeTransform {
     }
 
     transform(city: string): Observable<CityTemp> {
+
+        let subject = new BehaviorSubject(city);
+        subject.subscribe({
+            next: (val: string) => {
+              console.log(`Entered value: ${val}`);
+            }
+        })
 
         if(city) {
             if (!this.cache.hasOwnProperty(city)) {

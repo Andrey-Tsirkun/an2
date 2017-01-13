@@ -15,7 +15,7 @@ interface IResponse {
     }
 }
 
-interface IWeatherData {
+interface ICityWeather {
     name: string,
     main: {
         temp: number
@@ -55,7 +55,7 @@ interface IWeatherData {
 })
 
 export class AppComponent {
-    cities: IWeatherData;
+    cities: ICityWeather[];
     visibleStart: number;
     visibleEnd: number;
     itemsNum: number;
@@ -74,16 +74,20 @@ export class AppComponent {
             this.lat = resp.coords.latitude;
             this.lon = resp.coords.longitude;
 
-            this.httpService.getWeather(resp.coords).toPromise().then(
-                res => {
-                    this.cities = res.json().list;
-                    console.log(this.cities)
-                    this.itemsNum = Object.keys(this.cities).length;
-                    this.updDate = new Date();
-                }, (err) => {
-                    this.updDate = new Date();
-                    this.weatherError = err;
-                })
+            this.httpService.getWeather(resp.coords)
+                .retry(3)
+                .map(res => res.json().list)
+                .filter( x => x.length )
+                .take(50)
+                .subscribe(
+                    res => {
+                        this.cities = res;
+                        this.itemsNum = Object.keys(this.cities).length;
+                        this.updDate = new Date();
+                    },
+                    err => {
+                        this.weatherError = err
+                    })
         });
     }
 

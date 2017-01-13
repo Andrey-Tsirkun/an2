@@ -1,10 +1,3 @@
-import { Config } from '../config/config';
-
-interface Coords {
-    latitude: number,
-    longitude: number
-}
-
 export class PositionService {
     getCurrCoords() {
         let options = {

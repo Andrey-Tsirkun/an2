@@ -12,8 +12,4 @@ interface IWind {
 })
 export class Wind {
     wind: IWind;
-
-    ngOnChanges() {
-        console.log(this.wind)
-    }
 }
