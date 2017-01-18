@@ -37,4 +37,15 @@ export class HttpService {
         let url = this.getUrl(coords);
         return this.http.get(url);
     }
+
+    private getForecast(res) {
+        return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${res.json().coord.lat}&lon=${res.json().coord.lon}&appid=${config.id}`);
+    }
+
+    getCityWeather(city) {
+        return this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.id}`)
+            .flatMap(data =>
+                this.getForecast(data)
+                    .map(res => res.json().list.slice(0, 3)));
+    }
 }
