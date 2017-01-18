@@ -28,6 +28,8 @@ export class Cityweather {
             .subscribe((model): void => {
                 this.httpService.getCityWeather(model).subscribe((res: Array<IForecast>) => {
 
+                    // I know, it looks stupid, but i don't know any other place in my
+                    // project for BehaviourSubject implementation. =\
                     let bSubject = new BehaviorSubject(model);
                     bSubject.subscribe((value) => {
                         console.log(`%c New value is: ${value}`, `color: orange`)
