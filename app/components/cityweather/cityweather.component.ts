@@ -17,25 +17,24 @@ interface IForecast {
 })
 export class Cityweather {
     cityForecast: Array<IForecast>;
-    data: any;
     modelChanged: Subject<string> = new Subject<string>();
-
+    bSubject = new BehaviorSubject(null);
 
     constructor(private httpService: HttpService) {
+
+        // I know, this approach looks stupid, but i don't know any other place in my
+        // project for BehaviourSubject implementation. =\
+        this.bSubject.subscribe((value: string) => {
+            console.log(`%c New value is: ${value}`, `color: orange`)
+        });
+
         this.modelChanged
             .debounceTime(1000)
             .distinctUntilChanged()
             .subscribe((model): void => {
                 this.httpService.getCityWeather(model).subscribe((res: Array<IForecast>) => {
-
-                    // I know, it looks stupid, but i don't know any other place in my
-                    // project for BehaviourSubject implementation. =\
-                    let bSubject = new BehaviorSubject(model);
-                    bSubject.subscribe((value) => {
-                        console.log(`%c New value is: ${value}`, `color: orange`)
-                    });
-
                     this.cityForecast = res;
+                    this.bSubject.next(model);
                 });
             });
     }
