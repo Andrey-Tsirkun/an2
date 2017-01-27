@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Logger } from "../../../services/logger.service";
 
 interface IWeatherData {
     name: string,
@@ -30,6 +31,10 @@ export class WeatherList {
     weatherError: IWeatherError;
     updDate: Date;
     selected: boolean;
+
+    constructor(loggerService: Logger) {
+        loggerService.log('weather list load')
+    }
 
     ngOnInit() {
         this.visibleStart = 0;

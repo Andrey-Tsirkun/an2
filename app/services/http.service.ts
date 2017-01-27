@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Config } from '../config/config';
-import {Observable} from "rxjs";
+import { Observable} from "rxjs";
 let config = new Config();
 
 interface Coords {

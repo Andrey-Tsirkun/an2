@@ -11,6 +11,8 @@ import { WeatherIcon } from './components/weathericon/weathericon.component';
 import { WeatherColor } from './directives/weathercolor/weathercolor.directive';
 import { WindInfo } from './directives/windinfo/windinfo.directive';
 
+import { Logger } from '../services/logger.service'
+
 @NgModule({
     imports: [
         CommonModule,
@@ -25,7 +27,9 @@ import { WindInfo } from './directives/windinfo/windinfo.directive';
         Cityweather,
         WeatherIcon,
     ],
-    providers: [],
+    providers: [
+        Logger
+    ],
     exports: [
         Wind, WeatherColor, WindInfo, WeatherList, Cityweather, WeatherIcon
     ]
