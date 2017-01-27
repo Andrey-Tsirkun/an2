@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Config } from '../../config/config'
+import { Config } from '../../../config/config'
 
 let config = new Config();
 
 @Component({
     selector: 'pager',
-    templateUrl: `app/components/pager/pager.component.html`
+    templateUrl: `app/general/components/pager/pager.component.html`
 })
 export class Pager {
     start: number = 0;

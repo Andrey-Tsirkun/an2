@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
-import { Map } from '../components/map/map.component';
+import { Map } from './components/map/map.component';
 
 import { Config } from '../config/config';
 let config = new Config();

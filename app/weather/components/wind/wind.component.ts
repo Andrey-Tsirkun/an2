@@ -7,7 +7,7 @@ interface IWind {
 
 @Component({
     selector: 'wind',
-    templateUrl: `app/components/wind/wind.component.html`,
+    templateUrl: `app/weather/components/wind/wind.component.html`,
     inputs: ['wind']
 })
 export class Wind {

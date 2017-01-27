@@ -19,7 +19,7 @@ interface IWeatherError {
 
 @Component({
     selector: 'weather-list',
-    templateUrl: `app/components/weatherlist/weatherlist.component.html`,
+    templateUrl: `app/weather/components/weatherlist/weatherlist.component.html`,
     inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

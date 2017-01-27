@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../../services/http.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 interface IForecast {
@@ -13,7 +13,7 @@ interface IForecast {
 
 @Component({
     selector: 'weather-cityweather',
-    templateUrl: `app/components/cityweather/cityweather.component.html`,
+    templateUrl: `app/weather/components/cityweather/cityweather.component.html`,
 })
 export class Cityweather {
     cityForecast: Array<IForecast>;

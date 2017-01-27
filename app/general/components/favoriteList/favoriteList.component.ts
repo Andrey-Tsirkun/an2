@@ -7,7 +7,7 @@ export class City {
 
 @Component({
     selector: 'favorite-list',
-    templateUrl: `app/components/favoriteList/favoriteList.component.html`,
+    templateUrl: `app/general/components/favoriteList/favoriteList.component.html`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoriteList {
