@@ -5,8 +5,8 @@
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run lint && webpack-dev-server",
-    "startDev": "SET 'NODE_ENV=development' && tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server",
-    "startProd": "SET 'NODE_ENV=production' && tslint -c tslint.json 'src/**/*.ts' && webpack-dev-server"
+    "aot": "rimraf dist && webpack --config app/config/webpack.prod.js --progress --profile --bail",
+    "jit": "webpack --config app/config/webpack.dev.js"
   },
   "dependencies": {
     "@angular/common": "2.0.0",
