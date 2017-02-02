@@ -6,7 +6,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run lint && webpack-dev-server",
     "aot": "rimraf dist && webpack --config app/config/webpack.prod.js --progress --profile --bail",
-    "jit": "webpack --config app/config/webpack.dev.js"
+    "jit": "rimraf dist webpack --config app/config/webpack.dev.js"
   },
   "dependencies": {
     "@angular/common": "2.0.0",
