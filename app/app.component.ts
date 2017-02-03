@@ -29,9 +29,11 @@ interface ICityWeather {
 }
 
 interface IFormData {
-    number: string,
-    start: string,
-    wind: boolean
+    controls: {
+        number: { value: string },
+        start: { value: string },
+        wind: { value: boolean }
+    }
 }
 
 @Component({
@@ -106,6 +108,12 @@ export class AppComponent {
     }
 
     formChanged(formData) {
-        this.formData = formData;
+        this.formData = {
+            controls: {
+                number: { value: formData.controls.number.value },
+                start: { value: formData.controls.start.value },
+                wind: { value: formData.controls.wind.value }
+            }
+        };
     }
 }

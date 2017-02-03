@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnChanges} from '@angular/core';
 import { Logger } from "../../../services/logger.service";
 
 interface IWeatherData {
@@ -19,9 +19,11 @@ interface IWeatherError {
 }
 
 interface IFormData {
-    number: string,
-    start: string,
-    wind: boolean
+    controls: {
+        number: { value: string },
+        start: { value: string },
+        wind: { value: boolean }
+    }
 }
 
 @Component({
@@ -47,9 +49,11 @@ export class WeatherList {
         this.visibleStart = 0;
         this.visibleEnd = 10;
         this.formData = {
-            number: '50',
-            start: '',
-            wind: false
+            controls: {
+                number: { value: '50' },
+                start: { value: '' },
+                wind: { value: false }
+            }
         }
     }
 
