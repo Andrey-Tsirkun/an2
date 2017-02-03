@@ -17,7 +17,8 @@
             <div>
                 <weather-icon [id]="city.weather[0]['id']"></weather-icon>
             </div>
-            <wind [wind]="city.wind"></wind>
+            <wind [wind]="city.wind" [ngClass]="{ 'visible': formData.wind }"></wind>
+            {{ formData.wind }}
         </div>
     </li>
 </ul>

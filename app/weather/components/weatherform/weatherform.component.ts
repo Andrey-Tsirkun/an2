@@ -1,22 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'weather-form',
-    templateUrl: 'app/weather/components/weatherform/weatherform.component.html'
+    templateUrl: 'app/weather/components/weatherform/weatherform.component.html',
+    inputs: ['cities']
 })
 export class WeatherForm {
     form: FormGroup;
-
-    firstName = new FormControl("", Validators.required);
+    number: Array<number>;
+    @Output() formChanged = new EventEmitter<Object>();
 
     constructor(fb: FormBuilder) {
+        this.number = [10, 20, 30, 40, 50]; // can be moved to the loop
+
         this.form = fb.group({
-            "firstName": this.firstName,
-            "password":["", Validators.required]
+            "number": new FormControl(this.number, Validators.required),
+            "start": new FormControl("", Validators.required),
+            "wind": new FormControl("", Validators.required)
         });
+
+        this.form.valueChanges
+            .debounceTime(2000)
+            .map((value) => {
+                console.log(1, value)
+            })
+            .filter((value) => this.form.valid)
+            .subscribe((value) => {
+                this.formChanged.emit(JSON.stringify(value));
+            });
     }
-    onSubmitModelBased() {
+
+    onSubmit() {
         console.log("model-based form submitted");
         console.log(this.form);
     }

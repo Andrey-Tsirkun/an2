@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module'
 
 import { Cityweather } from './components/cityweather/cityweather.component';
@@ -18,7 +18,8 @@ import { Logger } from '../services/logger.service'
     imports: [
         CommonModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     declarations: [
         Wind,

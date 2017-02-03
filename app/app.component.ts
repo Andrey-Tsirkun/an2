@@ -28,18 +28,25 @@ interface ICityWeather {
     selected: boolean
 }
 
+interface IFormData {
+    number: string,
+    start: string,
+    wind: boolean
+}
+
 @Component({
     selector: 'app',
     providers: [HttpService],
     template: `
         <main>        
             <weather-header></weather-header>
-            <weather-form></weather-form>
+            <weather-form [cities]="cities" (formChanged)="formChanged($event)"></weather-form>
             <weather-list 
                 [weatherError]="weatherError"
                 [cities]="cities"
                 [visibleStart]="visibleStart"
-                [visibleEnd]="visibleEnd"></weather-list>
+                [visibleEnd]="visibleEnd"
+                [formData]="formData"></weather-list>
             <pager id="pager"
                 [itemsNum]="itemsNum"
                 (onChanged)="onChanged($event)"></pager>
@@ -67,6 +74,7 @@ export class AppComponent {
         statusText: string
     };
     updDate: Date;
+    formData: IFormData;
 
     constructor(private httpService: HttpService){}
 
@@ -76,7 +84,7 @@ export class AppComponent {
             this.lon = resp.coords.longitude;
 
             this.httpService.getWeather(resp.coords)
-                .retry(3)
+                .retry(0)
                 .map(res => res.json().list)
                 .filter( x => x.length )
                 .take(50)
@@ -95,5 +103,9 @@ export class AppComponent {
     onChanged(numStart){
         this.visibleStart = numStart;
         this.visibleEnd = numStart + config.itemsPerPage;
+    }
+
+    formChanged(formData) {
+        this.formData = formData;
     }
 }
