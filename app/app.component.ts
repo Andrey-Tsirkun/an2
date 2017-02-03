@@ -32,8 +32,9 @@ interface ICityWeather {
     selector: 'app',
     providers: [HttpService],
     template: `
-        <main>
+        <main>        
             <weather-header></weather-header>
+            <weather-form></weather-form>
             <weather-list 
                 [weatherError]="weatherError"
                 [cities]="cities"
