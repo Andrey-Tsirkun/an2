@@ -6,7 +6,7 @@ let config = new Config();
 interface IFormData {
     controls: {
         number: { value: string },
-        start: { value: string },
+        icon: { value: string},
         wind: { value: boolean }
     }
 }
@@ -32,7 +32,7 @@ export class Pager {
         this.formData = {
             controls: {
                 number: { value: '50' },
-                start: { value: '' },
+                icon: { value: '' },
                 wind: { value: false }
             }
         }

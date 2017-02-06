@@ -31,7 +31,6 @@ interface ICityWeather {
 interface IFormData {
     controls: {
         number: { value: string },
-        start: { value: string },
         icon: { value: string},
         wind: { value: boolean }
     }
@@ -116,7 +115,6 @@ export class AppComponent {
         this.formData = {
             controls: {
                 number: { value: formData.controls.number.value },
-                start: { value: formData.controls.start.value },
                 icon: { value: formData.controls.icon.value },
                 wind: { value: formData.controls.wind.value }
             }

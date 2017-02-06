@@ -21,7 +21,6 @@ interface IWeatherError {
 interface IFormData {
     controls: {
         number: { value: string },
-        start: { value: string },
         icon: { value: string},
         wind: { value: boolean }
     }
@@ -53,7 +52,6 @@ export class WeatherList {
         this.formData = {
             controls: {
                 number: { value: '50' },
-                start: { value: '' },
                 icon: { value: 'YES'},
                 wind: { value: true }
             }
@@ -62,7 +60,6 @@ export class WeatherList {
 
     ngOnChanges() {
         if(this.formData) {
-            console.log(2354, this.formData)
             this.showIcon = this.formData.controls.icon.value == 'YES'
         }
     }
