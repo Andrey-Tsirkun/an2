@@ -3,21 +3,47 @@ import { Config } from '../../../config/config'
 
 let config = new Config();
 
+interface IFormData {
+    controls: {
+        number: { value: string },
+        start: { value: string },
+        wind: { value: boolean }
+    }
+}
+
 @Component({
     selector: 'pager',
-    templateUrl: `app/general/components/pager/pager.component.html`
+    templateUrl: `app/general/components/pager/pager.component.html`,
+    inputs: ['formData']
 })
 export class Pager {
     start: number = 0;
+    formData: IFormData;
     @Output() onChanged = new EventEmitter<number>();
     _itemsNum: number;
+    disabledNext: boolean = false;
 
     @Input()
     set itemsNum(itemsNum: number) {
         this._itemsNum = itemsNum;
     }
 
+    ngOnInit() {
+        this.formData = {
+            controls: {
+                number: { value: '50' },
+                start: { value: '' },
+                wind: { value: false }
+            }
+        }
+    }
+
+    ngOnChanges() {
+        this.checkNumber();
+    }
+
     changePage(direction: boolean): void {
+        // console.log(222, this._itemsNum, +this.formData.controls.number.value)
         let cnt: number = this.start;
 
         if(direction) {
@@ -41,6 +67,14 @@ export class Pager {
 
         if(cnt <= this._itemsNum - config.itemsPerPage && cnt >= 0) {
             this.onChanged.emit(cnt);
+        }
+
+        this.checkNumber();
+    }
+
+    checkNumber() {
+        if(this.formData) {
+            this.disabledNext = +this.formData.controls.number.value - this.start == 10
         }
     }
 }

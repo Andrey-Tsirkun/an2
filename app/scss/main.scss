@@ -37,6 +37,14 @@ body {
         }
       }
     }
+
+    .wind {
+      display: none;
+
+      &.visible {
+        display: block;
+      }
+    }
   }
 
   &.visible {
@@ -145,6 +153,7 @@ footer {
     input {
       margin-right: 10px;
     }
+
   }
 
   #favoriteLabel {
@@ -159,4 +168,22 @@ footer {
     white-space: nowrap;
     cursor: pointer;
   }
+}
+
+.windInfo {
+  text-align: left;
+}
+
+.submitForm {
+  text-align: left;
+}
+
+.bottomContent {
+  overflow: hidden;
+}
+
+.field-description {
+  font-size: 10px;
+  font-style: italic;
+  text-align: left;
 }

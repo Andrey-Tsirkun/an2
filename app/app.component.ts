@@ -32,6 +32,7 @@ interface IFormData {
     controls: {
         number: { value: string },
         start: { value: string },
+        icon: { value: string},
         wind: { value: boolean }
     }
 }
@@ -41,8 +42,7 @@ interface IFormData {
     providers: [HttpService],
     template: `
         <main>        
-            <weather-header></weather-header>
-            <weather-form [cities]="cities" (formChanged)="formChanged($event)"></weather-form>
+            <weather-header></weather-header>            
             <weather-list 
                 [weatherError]="weatherError"
                 [cities]="cities"
@@ -51,10 +51,15 @@ interface IFormData {
                 [formData]="formData"></weather-list>
             <pager id="pager"
                 [itemsNum]="itemsNum"
-                (onChanged)="onChanged($event)"></pager>
-            <weather-map
-                [lat]="lat"
-                [lon]="lon"></weather-map>
+                (onChanged)="onChanged($event)"
+                [formData]="formData"></pager>
+            <div class="bottomContent">
+                <weather-form [cities]="cities" (formChanged)="formChanged($event)" class="col-sm-6"></weather-form>
+                <weather-map
+                    class="col-sm-6"
+                    [lat]="lat"
+                    [lon]="lon"></weather-map>
+            </div>    
             <weather-footer></weather-footer>
         </main>
         <aside>
@@ -112,6 +117,7 @@ export class AppComponent {
             controls: {
                 number: { value: formData.controls.number.value },
                 start: { value: formData.controls.start.value },
+                icon: { value: formData.controls.icon.value },
                 wind: { value: formData.controls.wind.value }
             }
         };
