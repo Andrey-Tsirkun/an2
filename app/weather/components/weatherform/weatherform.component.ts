@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ValidationService } from '../../service/validation.service'
 
 @Component({
     selector: 'weather-form',
@@ -14,26 +15,13 @@ export class WeatherForm {
     constructor(fb: FormBuilder) {
         this.form = fb.group({
             'number': ['50', Validators.required],
-            'icon': ['YES', [Validators.required, this.iconValidator]],
+            'icon': ['YES', [Validators.required, ValidationService.iconValidator]],
             'wind': [true]
         });
     }
 
     onSubmit() {
-        //this.formChanged.emit(this.form);
-        console.log(this.form)
+        this.formChanged.emit(this.form);
         this.form.reset();
-    }
-
-    // custom validator
-    iconValidator(control: FormControl) {
-
-        if(control.value === 'YES' || control.value === 'NO'){
-            return null;
-        }
-        else {
-            return {'iconFieldValid': true};
-        }
-
     }
 }
