@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module'
 
 import { Cityweather } from './components/cityweather/cityweather.component';
 import { WeatherList } from './components/weatherlist/weatherlist.component';
 import { Wind } from './components/wind/wind.component';
 import { WeatherIcon } from './components/weathericon/weathericon.component';
+import { WeatherForm } from './components/weatherform/weatherform.component';
+import { ControlMessages } from './components/formmessages/formmessages.component'
 
 import { WeatherColor } from './directives/weathercolor/weathercolor.directive';
 import { WindInfo } from './directives/windinfo/windinfo.directive';
@@ -17,7 +19,8 @@ import { Logger } from '../services/logger.service'
     imports: [
         CommonModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     declarations: [
         Wind,
@@ -26,12 +29,14 @@ import { Logger } from '../services/logger.service'
         WeatherList,
         Cityweather,
         WeatherIcon,
+        WeatherForm,
+        ControlMessages
     ],
     providers: [
         Logger
     ],
     exports: [
-        Wind, WeatherColor, WindInfo, WeatherList, Cityweather, WeatherIcon
+        Wind, WeatherColor, WindInfo, WeatherList, Cityweather, WeatherIcon, WeatherForm, ControlMessages
     ]
 })
 export class WeatherModule {}

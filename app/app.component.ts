@@ -28,23 +28,37 @@ interface ICityWeather {
     selected: boolean
 }
 
+interface IFormData {
+    controls: {
+        number: { value: string },
+        icon: { value: string},
+        wind: { value: boolean }
+    }
+}
+
 @Component({
     selector: 'app',
     providers: [HttpService],
     template: `
-        <main>
-            <weather-header></weather-header>
+        <main>        
+            <weather-header></weather-header>            
             <weather-list 
                 [weatherError]="weatherError"
                 [cities]="cities"
                 [visibleStart]="visibleStart"
-                [visibleEnd]="visibleEnd"></weather-list>
+                [visibleEnd]="visibleEnd"
+                [formData]="formData"></weather-list>
             <pager id="pager"
                 [itemsNum]="itemsNum"
-                (onChanged)="onChanged($event)"></pager>
-            <weather-map
-                [lat]="lat"
-                [lon]="lon"></weather-map>
+                (onChanged)="onChanged($event)"
+                [formData]="formData"></pager>
+            <div class="bottomContent">
+                <weather-form [cities]="cities" (formChanged)="formChanged($event)" class="col-sm-6"></weather-form>
+                <weather-map
+                    class="col-sm-6"
+                    [lat]="lat"
+                    [lon]="lon"></weather-map>
+            </div>    
             <weather-footer></weather-footer>
         </main>
         <aside>
@@ -66,6 +80,7 @@ export class AppComponent {
         statusText: string
     };
     updDate: Date;
+    formData: IFormData;
 
     constructor(private httpService: HttpService){}
 
@@ -75,7 +90,7 @@ export class AppComponent {
             this.lon = resp.coords.longitude;
 
             this.httpService.getWeather(resp.coords)
-                .retry(3)
+                .retry(0)
                 .map(res => res.json().list)
                 .filter( x => x.length )
                 .take(50)
@@ -94,5 +109,15 @@ export class AppComponent {
     onChanged(numStart){
         this.visibleStart = numStart;
         this.visibleEnd = numStart + config.itemsPerPage;
+    }
+
+    formChanged(formData) {
+        this.formData = {
+            controls: {
+                number: { value: formData.controls.number.value },
+                icon: { value: formData.controls.icon.value },
+                wind: { value: formData.controls.wind.value }
+            }
+        };
     }
 }

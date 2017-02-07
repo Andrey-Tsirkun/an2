@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnChanges} from '@angular/core';
 import { Logger } from "../../../services/logger.service";
 
 interface IWeatherData {
@@ -18,10 +18,18 @@ interface IWeatherError {
     statusText: string
 }
 
+interface IFormData {
+    controls: {
+        number: { value: string },
+        icon: { value: string},
+        wind: { value: boolean }
+    }
+}
+
 @Component({
     selector: 'weather-list',
     templateUrl: `app/weather/components/weatherlist/weatherlist.component.html`,
-    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate'],
+    inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate', 'formData'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherList {
@@ -31,6 +39,8 @@ export class WeatherList {
     weatherError: IWeatherError;
     updDate: Date;
     selected: boolean;
+    formData: IFormData;
+    showIcon: boolean;
 
     constructor(loggerService: Logger) {
         loggerService.log('weather list load')
@@ -39,10 +49,24 @@ export class WeatherList {
     ngOnInit() {
         this.visibleStart = 0;
         this.visibleEnd = 10;
+        this.formData = {
+            controls: {
+                number: { value: '50' },
+                icon: { value: 'YES'},
+                wind: { value: true }
+            }
+        }
+    }
+
+    ngOnChanges() {
+        if(this.formData) {
+            this.showIcon = this.formData.controls.icon.value == 'YES'
+        }
     }
 
     isActive(i) {
-        return (i + 1 <= this.visibleEnd) && (i + 1 >= this.visibleStart);
+        let current: number = i + 1;
+        return (current <= +this.formData.controls.number.value - 1) && (current <= this.visibleEnd) && (current >= this.visibleStart);
     }
 
     markCity(city) {
