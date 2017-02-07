@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpModule }   from '@angular/http';
 
-import { GeneralModule } from './general/general.module';
+import { CoreModule } from './core/core.module';
 import { WeatherModule } from './weather/weather.module';
 import { MapModule } from './map/map.module';
 import { SharedModule } from './shared/shared.module';
@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
         BrowserModule,
         HttpModule,
         SharedModule,
-        GeneralModule,
+        CoreModule,
         WeatherModule,
         MapModule
     ],
