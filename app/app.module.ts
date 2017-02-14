@@ -5,9 +5,10 @@ import { HttpModule }   from '@angular/http';
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { CoreModule } from './core/core.module';
-import { WeatherModule } from './weather/weather.module';
 import { MapModule } from './map/map.module';
 import { SharedModule } from './shared/shared.module';
+
+import { WeatherAppRouting } from './routing';
 
 @NgModule({
     imports: [
@@ -16,8 +17,8 @@ import { SharedModule } from './shared/shared.module';
         ReactiveFormsModule,
         SharedModule,
         CoreModule,
-        WeatherModule,
-        MapModule
+        MapModule,
+        WeatherAppRouting
     ],
     declarations: [
         AppComponent

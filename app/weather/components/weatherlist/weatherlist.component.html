@@ -1,12 +1,8 @@
-<div class="center-block" *ngIf="!weatherError && !cities">
+<div class="center-block">
     <img src="app/img/sunny.gif">
 </div>
-<div *ngIf="weatherError">
-    <h3>{{ weatherError.statusCode }}</h3>
-    <h4>{{ weatherError.statusText }}</h4>
-</div>
-<h3 *ngIf="weatherError || cities">Last updated: {{ updDate | date:"dd/MM/yyyy hh:mm" }}</h3>
-<ul class="list-unstyled" id="weatherList" *ngIf="!weatherError">
+{{ cities }}
+<ul class="list-unstyled" id="weatherList">
     <li *ngFor="let city of cities; let i = index" class="weather-item"
         [ngClass]="{ 'visible': isActive(i) }"
         (click)="markCity(city)">

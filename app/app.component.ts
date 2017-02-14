@@ -1,19 +1,19 @@
 /// <reference path="../typings/index.d.ts" />
 
 import { Component } from '@angular/core';
-import { PositionService } from './services/services';
+/*import { PositionService } from './services/services';*/
 import { Config } from './config/config';
 import { HttpService } from './services/http.service';
 
-const GeoSrv = new PositionService();
+/*const GeoSrv = new PositionService();*/
 let config = new Config();
 
-interface IResponse {
+/*interface IResponse {
     coords: {
         latitude: number,
         longitude: number
     }
-}
+}*/
 
 interface ICityWeather {
     name: string,
@@ -40,51 +40,32 @@ interface IFormData {
     selector: 'app',
     providers: [HttpService],
     template: `
-        <main>        
+        <main>
             <weather-header></weather-header>            
-            <weather-list 
-                [weatherError]="weatherError"
-                [cities]="cities"
-                [visibleStart]="visibleStart"
-                [visibleEnd]="visibleEnd"
-                [formData]="formData"></weather-list>
-            <pager id="pager"
-                [itemsNum]="itemsNum"
-                (onChanged)="onChanged($event)"
-                [formData]="formData"></pager>
-            <div class="bottomContent">
-                <weather-form [cities]="cities" (formChanged)="formChanged($event)" class="col-sm-6"></weather-form>
-                <weather-map
-                    class="col-sm-6"
-                    [lat]="lat"
-                    [lon]="lon"></weather-map>
-            </div>    
+            <router-outlet></router-outlet>  
             <weather-footer></weather-footer>
         </main>
-        <aside>
-            <weather-cityweather></weather-cityweather>
-        </aside> 
         <favorite-list></favorite-list>
         `
 })
 
 export class AppComponent {
-    cities: ICityWeather[];
+    /*cities: ICityWeather[];*/
     visibleStart: number;
     visibleEnd: number;
     itemsNum: number;
     lat: number;
     lon: number;
-    weatherError: {
+    /*weatherError: {
         statusCode: number,
         statusText: string
-    };
+    };*/
     updDate: Date;
     formData: IFormData;
 
     constructor(private httpService: HttpService){}
 
-    ngOnInit() {
+    /*ngOnInit() {
         GeoSrv.getCurrCoords().then((resp: IResponse) => {
             this.lat = resp.coords.latitude;
             this.lon = resp.coords.longitude;
@@ -104,7 +85,7 @@ export class AppComponent {
                         this.weatherError = err
                     })
         });
-    }
+    }*/
 
     onChanged(numStart){
         this.visibleStart = numStart;

@@ -6,6 +6,7 @@ import { Pager } from './components/pager/pager.component';
 import { Header } from './components/header/header.component';
 import { Footer } from './components/footer/footer.component';
 import { FavoriteList } from './components/favoriteList/favoriteList.component';
+import { NotFound } from './components/notfound/notfound.component';
 
 import { Logger } from '../services/logger.service'
 
@@ -18,13 +19,15 @@ import { Logger } from '../services/logger.service'
         Pager,
         Header,
         Footer,
-        FavoriteList
+        FavoriteList,
+        NotFound
     ],
     exports: [
         Pager,
         Header,
         Footer,
-        FavoriteList
+        FavoriteList,
+        NotFound
     ],
     providers: [
         Logger
