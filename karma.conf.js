@@ -9,15 +9,15 @@ module.exports = function(config) {
             require('karma-webpack'),
             require('karma-sourcemap-loader'),
             require('karma-chrome-launcher'),
-            require('karma-jasmine-html-reporter'),
+            require('karma-jasmine-html-reporter')
         ],
         files: [{
-            pattern: './test/main',
+            pattern: 'test/main.js',
             watched: false
         }],
         exclude: [],
         preprocessors: {
-            './test/main': ['webpack', 'sourcemap']
+            'test/main.js': ['webpack', 'sourcemap']
         },
         webpack: webpackConfig({
             env: 'test'
