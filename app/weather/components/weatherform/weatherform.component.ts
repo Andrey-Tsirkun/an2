@@ -4,7 +4,7 @@ import { ValidationService } from '../../service/validation.service'
 
 @Component({
     selector: 'weather-form',
-    templateUrl: 'app/weather/components/weatherform/weatherform.component.html',
+    templateUrl: './weatherform.component.html',
     inputs: ['cities']
 })
 export class WeatherForm {

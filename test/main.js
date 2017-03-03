@@ -1,1 +1,1 @@
-require('./app/main.spec.ts');
+require('../app/main.spec.ts');

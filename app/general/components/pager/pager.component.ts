@@ -13,7 +13,7 @@ interface IFormData {
 
 @Component({
     selector: 'pager',
-    templateUrl: `app/general/components/pager/pager.component.html`,
+    templateUrl: `./pager.component.html`,
     inputs: ['formData']
 })
 export class Pager {

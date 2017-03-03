@@ -13,7 +13,7 @@ interface IForecast {
 
 @Component({
     selector: 'weather-cityweather',
-    templateUrl: `app/weather/components/cityweather/cityweather.component.html`,
+    templateUrl: `./cityweather.component.html`,
 })
 export class Cityweather {
     cityForecast: Array<IForecast>;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'weather-icon',
-    templateUrl: `app/weather/components/weathericon/weathericon.component.html`,
+    templateUrl: `./weathericon.component.html`,
     inputs: ['id']
 })
 export class WeatherIcon {

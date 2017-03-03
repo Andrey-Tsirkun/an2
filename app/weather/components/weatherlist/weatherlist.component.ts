@@ -28,7 +28,7 @@ interface IFormData {
 
 @Component({
     selector: 'weather-list',
-    templateUrl: `app/weather/components/weatherlist/weatherlist.component.html`,
+    templateUrl: `./weatherlist.component.html`,
     inputs: ['cities', 'visibleStart', 'visibleEnd', 'weatherError', 'updDate', 'formData'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

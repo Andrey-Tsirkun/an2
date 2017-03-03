@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'weather-map',
-    templateUrl: `app/map/components/map/map.component.html`,
+    templateUrl: `./map.component.html`,
     inputs: ['lat', 'lon']
 })
 export class Map {
